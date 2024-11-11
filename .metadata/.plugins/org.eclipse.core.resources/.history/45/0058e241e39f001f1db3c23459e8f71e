@@ -42,7 +42,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-int counter;
+int8_t counter;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -92,24 +92,24 @@ int main(void)
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   counter = 9;
+  HAL_GPIO_WritePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin, RESET);
+  HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, LED_DEBUG_Pin, RESET);
+  HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, LED_DEBUG_Pin, RESET);
   while (1)
   {
-	  if (counter == 0) counter = 9;
-	  else if (counter > 6) {
+	  if (counter > 6) {
+		  HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, LED_DEBUG_Pin, RESET);
 		  HAL_GPIO_WritePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin, SET);
-		  HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, RESET);
-		  HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, RESET);
 	  }
-	  else if (counter > 5) {
+	  if (counter > 5) {
 		  HAL_GPIO_WritePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin, RESET);
-		  HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, SET);
-		  HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, RESET);
+		  HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, LED_DEBUG_Pin, SET);
 	  }
-	  else if (counter > 0) {
-		  HAL_GPIO_WritePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin, RESET);
-		  HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, OUTPUT_Y0_Pin, RESET);
-		  HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, OUTPUT_Y1_Pin, SET);
+	  if (counter > 0) {
+		  HAL_GPIO_WritePin(OUTPUT_Y0_GPIO_Port, LED_DEBUG_Pin, RESET);
+		  HAL_GPIO_WritePin(OUTPUT_Y1_GPIO_Port, LED_DEBUG_Pin, SET);
 	  }
+	  if (counter == 0) counter = 9;
 	  counter--;
 	  HAL_Delay(1000);
     /* USER CODE END WHILE */
