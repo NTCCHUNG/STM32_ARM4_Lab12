@@ -42,7 +42,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-int8_t counter;
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -91,18 +91,15 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  counter = 3;
+
   while (1)
   {
-	  if (counter == 1) HAL_GPIO_WritePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin, SET);
-	  if ( counter < 1 || counter > 1) {
-		  if (counter == 0) counter = 3;
-		  HAL_GPIO_WritePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin, RESET);
-	  }
-	  counter--;
-	  HAL_Delay(2000);
-    /* USER CODE END WHILE */
 
+    /* USER CODE END WHILE */
+	  HAL_GPIO_WritePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin, SET);
+	  HAL_Delay(2000);
+	  HAL_GPIO_WritePin(LED_DEBUG_GPIO_Port, LED_DEBUG_Pin, RESET);
+	  HAL_Delay(4000);
     /* USER CODE BEGIN 3 */
   }
   /* USER CODE END 3 */
